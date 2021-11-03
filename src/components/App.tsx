@@ -13,15 +13,17 @@ import { RecordDetail } from './RecordDetail';
 //import Error404 from './Error404';
 import { Footer } from './Footer';
 import { ScrollToTop }  from './ScrollToTop';
-
+import styled from 'styled-components';
+import { Color, Vw, Device } from '../styleSetting/Setting';
+import { CustomMedia } from '../styleSetting/CustomMedia';
 
 export const App: FC = () => {
-    const [className, setClassName] = useState<string>();
 
     return (
         <div>
         <Header />
         <main>
+            <Sheading>こんにちは</Sheading>
             <ScrollToTop />
             <Switch>
                 <Route path='/' exact>
@@ -48,3 +50,13 @@ export const App: FC = () => {
         </div>
     );
 };
+
+const Sheading = styled.h1`
+    font-family: 'NotoSerifJPMedium';
+    color: ${Color.blue01};
+    font-size: ${Vw(60, Device.pc)};
+
+    ${CustomMedia.lessThan("ct")`
+        font-size: 100px;
+    `};
+`
