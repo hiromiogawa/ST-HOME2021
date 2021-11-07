@@ -1,6 +1,8 @@
 import { FC, useState, useContext } from 'react';
 import { Nav } from './Nav';
-import { LogoColorContext } from '../providers/LogoColorProvider';
+import styled from 'styled-components';
+import { LogoFlugContext } from '../providers/LogoFlugProvider';
+import { Color } from '../styleSetting/Setting';
 
 export const Header: FC = () => {
     const [ isToggleOn, setIsToggleOn ] = useState<boolean>();
@@ -8,18 +10,15 @@ export const Header: FC = () => {
     const onClickToggle = () => {
         setIsToggleOn(!isToggleOn);
     };
-
-
-    const { logoColor, setLogoColor } = useContext(LogoColorContext);
-
-    const onClickSwitch = () => setLogoColor(!logoColor);
-
     
+
+    const { logoFlug, setLogoFlug } = useContext(LogoFlugContext);
+    const onClickSwitch = () => setLogoFlug(!logoFlug);
+
 
 
     return (
-        <header>
-            <button onClick={onClickSwitch}>テスト</button>
+        <Sheader>
             <h1>
                 <svg>
                     <defs></defs>
@@ -53,6 +52,31 @@ export const Header: FC = () => {
 						<span></span>
 					</div>
 				</div>
-        </header>
+        </Sheader>
     );
 };
+
+const Sheader = styled.header`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    .cls-1 {
+        fill: none;
+        stroke: ${Color.white};
+        stroke-width: 1.5px;
+        stroke-miterlimit: 10;
+    }
+    
+    .cls-2 {
+        fill: ${Color.white};
+    }
+
+    .cls-3 {
+        fill: none;
+        stroke: ${Color.white};
+        stroke-width: 2.62px;
+        stroke-miterlimit: 10;
+    }
+`
