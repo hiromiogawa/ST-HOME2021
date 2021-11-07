@@ -2,7 +2,7 @@ import { FC, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Logo } from './Logo';
 import { Nav } from './Nav';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { LogoColorContext } from '../../providers/LogoColorProvider';
 import { Color } from '../../styleSetting/Setting';
 
@@ -16,19 +16,19 @@ export const Header: FC = () => {
 
     const onClickMenu = () => {
         setMenuFlug(!menuFlug);
-        console.log("hoge");
     }
+
     return (
         <Sheader>
             <h1>
                 <Link to="/">
-                    <Logo color={logoColor} />
+                    <Logo color={ menuFlug? Color.white: logoColor} />
                 </Link>
             </h1>
-            <Snav>
+            <Snav flug={ menuFlug }>
                 <Nav />
             </Snav>
-            <SmenuButton onClick={() => onClickMenu}>
+            <SmenuButton flug={ menuFlug } onClick={() => onClickMenu()}>
                 <span></span><span></span><span></span>
             </SmenuButton>
         </Sheader>
@@ -52,19 +52,63 @@ const Sheader = styled.header`
     }
 `
 
-const Snav = styled.nav`
+type flugType = {
+    flug: boolean,
+};
+
+const fadeIn = keyframes`
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+`;
+
+const Snav = styled.nav<flugType>`
     position: fixed;
-    top: -41px;
-    right: -41px;
+    top: ${(props) => props.flug? "-50vh" : "-41px"};
+    right: ${(props) => props.flug? "-50vw" : "-41px"};
     overflow: hidden;
     background-color: ${Color.blue01};
-    border-radius: 50%;
-    z-index: 9998;
-    width: 200px;
-    height: 200px;
+    border-radius: ${(props) => props.flug? "0" : "50%"};
+    z-index: 9997;
+    width: ${(props) => props.flug? "200vw" : "200px"};
+    height: ${(props) => props.flug? "200vh" : "200px"};
+    transition: width 1s, height 1s, border-radius 1s, top ${(props) => props.flug? ".5s" : ".9s"}, right ${(props) => props.flug? ".5s" : ".9s"};
+
+    ul {
+        position: fixed;
+        visibility: ${(props) => props.flug? "visible" : "hidden"};
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        ${props => props.flug ? css`
+        animation: ${fadeIn} .35s linear 1s forwards;
+        ` : css`
+        `}
+
+        li {
+            padding: 2.5vh;
+            font-family: 'RalewayMedium';
+            text-align: center;
+
+            a {
+                color: ${Color.white};
+                font-size: 32px;
+                text-decoration: none;
+            }
+        }
+    }
 `
 
-const SmenuButton = styled.div`
+const SmenuButton = styled.div<flugType>`
     position: fixed;
     top: 53.13px;
     right: 47px;
@@ -72,7 +116,7 @@ const SmenuButton = styled.div`
     width: 57.6px;
     height: 36px;
     cursor: pointer;
-    z-index: 9999;
+    z-index: 9998;
 
     span {
         position: absolute;
@@ -84,18 +128,20 @@ const SmenuButton = styled.div`
         border-radius: 4px;
 
         &:nth-of-type(1) {
-            top: 0;
-            transform: translateX(-50%);
+            top: ${(props) => props.flug? "50%" : "0"};
+            transform: ${(props) => props.flug? "translate(-50%,-50%) rotate(45deg)" : "translateX(-50%)"};
         }
 
         &:nth-of-type(2) {
             top: 50%;
             transform: translate(-50%, -50%);
+            transition: opacity .35s;
+            opacity: ${(props) => props.flug? "0" : "1"};
         }
 
         &:nth-of-type(3) {
-            top: 100%;
-            transform: translate(-50%, -100%);
+            top: ${(props) => props.flug? "50%" : "100%"};
+            transform: ${(props) => props.flug?"translate(-50%,-50%) rotate(-45deg)" : "translate(-50%, -100%)"};
         }
     }
 `

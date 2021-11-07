@@ -5,7 +5,7 @@ import { Color } from '../styleSetting/Setting';
 
 
 export const useLogoColor = () => {
-    const { logoColor, setLogoColor } = useContext(LogoColorContext);
+    const { setLogoColor } = useContext(LogoColorContext);
     const changeLogoColor = (color: string): void  => {
         switch(color) {
             case 'black':
@@ -16,7 +16,6 @@ export const useLogoColor = () => {
                 break;
         };
     };
-    console.log(logoColor);
 
     return { changeLogoColor };
 };

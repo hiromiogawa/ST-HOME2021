@@ -4,7 +4,6 @@ import { Color } from '../styleSetting/Setting';
 type LogoFlugType = {
     logoColor: string,
     setLogoColor: Function,
-    //children: ReactNode | ReactNode[];
 };
 export const LogoColorContext = createContext<LogoFlugType>({ logoColor: Color.white, setLogoColor: () => {} });
 
