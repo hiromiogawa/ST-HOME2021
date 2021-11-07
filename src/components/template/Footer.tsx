@@ -4,7 +4,7 @@ export const Footer: FC = () => {
 
     return (
         <footer>
-           フッター
+            フッター
         </footer>
     );
 };
