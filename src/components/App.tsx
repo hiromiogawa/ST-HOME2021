@@ -1,7 +1,9 @@
-import { FC, useState } from 'react';
+import { FC, useState, useContext } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import { LoadFlugContext } from '../providers/LoadFlugProvider';
+import { MvFlugContext } from '../providers/MvFlugProvider';
 import { Header } from './template/Header';
-import { Home } from './pages/Home';
+import { Home } from './pages/home';
 import { Profile } from './pages/Profile';
 //import Business from './Business';
 //import Construction from './Construction';
@@ -18,9 +20,18 @@ import { CustomMedia } from '../styleSetting/CustomMedia';
 
 export const App: FC = () => {
 
+    const { loadFlug } = useContext(LoadFlugContext);
+    const { mvFlug } = useContext(MvFlugContext);
+
     return (
         <div>
-        <Header />
+        {
+            (() => {
+                if (loadFlug) {
+                    return <Header />
+                }         
+            })()
+        }
         <main>
             <Switch>
                 <Route path='/' exact>
@@ -43,7 +54,15 @@ export const App: FC = () => {
                 <Redirect to='/404' />*/}
             </Switch>
         </main>
-        <Footer />
+        {
+        (() => {
+            if (loadFlug && !mvFlug) {
+                return <Footer />
+            } else if(!loadFlug) {
+                <div>Load</div>
+            }
+        })()
+        }
         </div>
     );
 };

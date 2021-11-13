@@ -2,9 +2,10 @@ import { FC, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Logo } from './Logo';
 import { Nav } from './Nav';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { LogoColorContext } from '../../providers/LogoColorProvider';
 import { Color } from '../../styleSetting/Setting';
+import { SFadeIn } from '../../styleSetting/CommonStyle';
 
 export const Header: FC = () => {
     
@@ -56,14 +57,7 @@ type flugType = {
     flug: boolean,
 };
 
-const fadeIn = keyframes`
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-`;
+
 
 const Snav = styled.nav<flugType>`
     position: fixed;
@@ -90,7 +84,7 @@ const Snav = styled.nav<flugType>`
         left: 0;
         opacity: 0;
         ${props => props.flug ? css`
-        animation: ${fadeIn} .35s linear 1s forwards;
+        animation: ${SFadeIn} .35s linear .5s forwards;
         ` : css`
         `}
 
