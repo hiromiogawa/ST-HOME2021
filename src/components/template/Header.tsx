@@ -1,13 +1,14 @@
-import { FC, useContext, useState } from 'react';
+import { FC, useContext, useState, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { Logo } from './Logo';
 import { Nav } from './Nav';
 import styled, { css } from 'styled-components';
 import { LogoColorContext } from '../../providers/LogoColorProvider';
 import { Color } from '../../styleSetting/Setting';
-import { SFadeIn } from '../../styleSetting/CommonStyle';
+import { SfadeIn } from '../../styleSetting/CommonStyle';
+import { flugType } from '../../types/Common';
 
-export const Header: FC = () => {
+export const Header: FC = memo(() => {
     
     // ロゴの色プロバイダー取得
     const { logoColor } = useContext(LogoColorContext);
@@ -34,7 +35,7 @@ export const Header: FC = () => {
             </SmenuButton>
         </Sheader>
     );
-};
+});
 
 const Sheader = styled.header`
     h1 {
@@ -52,10 +53,6 @@ const Sheader = styled.header`
         }
     }
 `
-
-type flugType = {
-    flug: boolean,
-};
 
 
 
@@ -84,7 +81,7 @@ const Snav = styled.nav<flugType>`
         left: 0;
         opacity: 0;
         ${props => props.flug ? css`
-        animation: ${SFadeIn} .35s linear .5s forwards;
+        animation: ${SfadeIn} .35s linear .5s forwards;
         ` : css`
         `}
 

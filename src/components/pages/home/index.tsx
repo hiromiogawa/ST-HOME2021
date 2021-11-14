@@ -1,17 +1,11 @@
-import { FC, useState } from 'react';
-import { useLogoColor } from '../../../hooks/useLogoColor';
+import { FC, useState, memo } from 'react';
 import { MainVisual } from './MainVisual';
-import { Content } from './Content';
+import { Content } from './content/Content';
 
 
-export const Home: FC = () => {
-
-    // カスタムフックロゴの色変更関数呼び出し
-    const { changeLogoColor } = useLogoColor();
+export const Home: FC = memo(() => {
 
     const [ currentSection, setCurrentSection ] = useState<string>('mainvisual');
-
-    console.log(currentSection);
 
     return (
         <article>
@@ -27,4 +21,4 @@ export const Home: FC = () => {
             }
         </article>
     );
-};
+});

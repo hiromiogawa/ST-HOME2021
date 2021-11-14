@@ -1,4 +1,4 @@
-import { FC, useState, useContext } from 'react';
+import { FC, useState, useContext, memo } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { LoadFlugContext } from '../providers/LoadFlugProvider';
 import { MvFlugContext } from '../providers/MvFlugProvider';
@@ -18,7 +18,7 @@ import styled from 'styled-components';
 import { Color, Vw, Device } from '../styleSetting/Setting';
 import { CustomMedia } from '../styleSetting/CustomMedia';
 
-export const App: FC = () => {
+export const App: FC = memo(() => {
 
     const { loadFlug } = useContext(LoadFlugContext);
     const { mvFlug } = useContext(MvFlugContext);
@@ -65,7 +65,7 @@ export const App: FC = () => {
         }
         </div>
     );
-};
+});
 
 const Sheading = styled.h1`
     font-family: 'NotoSerifJPMedium';

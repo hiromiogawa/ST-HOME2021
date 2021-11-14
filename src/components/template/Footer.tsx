@@ -1,10 +1,10 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 
-export const Footer: FC = () => {
+export const Footer: FC = memo(() => {
 
     return (
         <footer>
             フッター
         </footer>
     );
-};
+});

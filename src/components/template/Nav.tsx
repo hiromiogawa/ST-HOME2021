@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { Link } from 'react-router-dom';
 
-export const Nav: FC = () => {
+export const Nav: FC = memo(() => {
     return (
         <ul>
             <li><Link to="/">TOP</Link></li>
@@ -14,4 +14,4 @@ export const Nav: FC = () => {
             <li><Link to="/">Contact</Link></li>
         </ul>
     );
-};
+});

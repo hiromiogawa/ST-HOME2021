@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { useMvFlug } from '../../../hooks/useMvFlug';
 import { useLoadFlug } from '../../../hooks/useLoadFlug';
 import styled, { css } from 'styled-components';
 import { Color, Vw, Device } from '../../../styleSetting/Setting';
 import { CurrentType, WheelEventType } from '../../../types/Home';
-import { SMask } from '../../../styleSetting/CommonStyle';
+import { Smask, SfadeOut } from '../../../styleSetting/CommonStyle';
+import { flugType, speedType } from '../../../types/Common';
 
-
-export const MainVisual = (props:CurrentType ) => {
+export const MainVisual = memo((props:CurrentType ) => {
     const { setCurrentSection } = props;
     const { changeMvFlug } = useMvFlug();
     const { changeLoadFlug } = useLoadFlug();
@@ -26,7 +26,6 @@ export const MainVisual = (props:CurrentType ) => {
         }
     };
 
-    console.log(scrollFlug);
 
     useEffect(() => {
         changeMvFlug(true);
@@ -34,9 +33,7 @@ export const MainVisual = (props:CurrentType ) => {
 
     return (
         <>
-        <SmainVisual
-        onWheel = {(e) => handleWheel(e)}
-        >
+        <SmainVisual flug = { scrollFlug } speed = { speed }>
             <img src="/images/index/mv_ph01_sp.jpg" 
             srcSet="
                 /images/index/mv_ph01_sp.jpg 767w,
@@ -45,13 +42,15 @@ export const MainVisual = (props:CurrentType ) => {
             <p><img src="/images/index/mv_tx01.svg" alt="Future Living 夢見た未来を貴方の暮らしに" /></p>
             <Sscroll><img src="/images/index/mv_scroll01.svg" alt="scroll" /></Sscroll>
         </SmainVisual>
-        <Smask flug = { scrollFlug } speed = { speed } />
+        <SmaskAnimate flug = { scrollFlug } speed = { speed } onWheel = {(e) => handleWheel(e)} />
         </>
     );
-};
+});
+
+type speedFlugType = flugType & speedType;
 
 
-const SmainVisual = styled.section`
+const SmainVisual = styled.section<speedFlugType>`
     position: fixed;
     width: calc(100% - 40px);
     height:  calc(100vh - 40px);
@@ -61,6 +60,10 @@ const SmainVisual = styled.section`
     top: 0;
     left: 0;
     z-index: 1;
+    ${props => props.flug ? css`
+        animation: ${SfadeOut} ${ props.speed / 3 }ms linear ${ props.speed / 3 }ms forwards;
+        ` : css`
+    `}
 
     &::before {
         content: "";
@@ -115,22 +118,44 @@ const Sscroll = styled.div`
     width: ${Vw(17, Device.pc)};
 `
 
-type flugType = {
-    flug: boolean,
-    speed: number
-};
-
-
-const Smask = styled.div<flugType>`
+const SmaskAnimate = styled.div<speedFlugType>`
     position: absolute;
-    width: 0;
+    width: 100%;
     height: 100vh;
-    right: 0;
+    left: 0;
     top: 0;
-    background-color: ${Color.blue01};
     z-index: 999;
-    ${props => props.flug ? css`
-        animation: ${SMask} ${ props.speed / 2 }ms linear ${ props.speed / 2 } ms forwards;
-        ` : css`
+    overflow: hidden;
+
+    &::before {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-color: ${Color.gray};
+        z-index: 998;
+        transform: translateX(-100%);
+        ${props => props.flug ? css`
+            animation: ${Smask} ${ props.speed / 3 * 2 }ms linear 0ms forwards;
+            ` : css`
         `}
+    }
+
+    &::after {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-color: ${Color.blue01};
+        z-index: 999;
+        transform: translateX(-100%);
+        ${props => props.flug ? css`
+            animation: ${Smask} ${ props.speed / 3 * 2 }ms linear ${ props.speed / 3 }ms forwards;
+            ` : css`
+        `}
+    }
 `
