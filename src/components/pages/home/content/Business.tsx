@@ -1,11 +1,8 @@
-
 import { FC, memo } from 'react';
 import styled, { css } from 'styled-components';
-import { Col2 } from '../../Col2';
-import { Scontents, Scol2 } from '../../../../../styleSetting/CommonStyle';
-import { Color } from '../../../../../styleSetting/Setting';
-import { Sheading01, SheadingFadeIn, SheadingAfter, SfadeUp } from '../../../../../styleSetting/CommonStyle';
-import { flugType } from '../../../../../types/Common';
+import { Col2 } from '../Col2';
+import { Scontents } from '../../../../styleSetting/CommonStyle';
+import { Color } from '../../../../styleSetting/Setting';
 
 export const Business: FC = memo(() => {
     return (

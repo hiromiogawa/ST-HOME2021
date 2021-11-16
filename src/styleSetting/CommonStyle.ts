@@ -10,32 +10,6 @@ export const Scontents = styled.div`
     padding: 0 40px;
 `
 
-type col2Type = {
-    reverce: boolean,
-    margin: string,
-    cellWidth: string
-}
-
-export const Scol2 = styled.div<col2Type>`
-    display: flex;
-    justify-content: space-around;
-    ${props => props.reverce ? css`
-        flex-direction: row-reverse;
-        ` : css`
-    `}
-
-    > * {
-        
-        &:first-child {
-            width: calc(100% - (${props => props.cellWidth + props.margin}));
-        }
-
-        &:last-child {
-            width: ${props => props.cellWidth};
-        }
-    }
-`
-
 // 共通スタイル
 export const Sheading01 = css`
     font-family: 'RalewayBold';

@@ -1,6 +1,6 @@
 import { FC, useState, memo } from 'react';
 import { MainVisual } from './MainVisual';
-import { Content } from './content/Content';
+import { Content } from './content';
 
 
 export const Home: FC = memo(() => {
