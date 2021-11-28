@@ -1,4 +1,4 @@
-import { FC, useState, useContext, memo } from 'react';
+import { FC, useContext, memo } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { LoadFlugContext } from '../providers/LoadFlugProvider';
 import { MvFlugContext } from '../providers/MvFlugProvider';
@@ -14,9 +14,6 @@ import { RecordDetail } from './pages/RecordDetail';
 //import Contact from './Contact';
 //import Error404 from './Error404';
 import { Footer } from './template/Footer';
-import styled from 'styled-components';
-import { Color, Vw, Device } from '../styleSetting/Setting';
-import { CustomMedia } from '../styleSetting/CustomMedia';
 
 export const App: FC = memo(() => {
 
@@ -66,13 +63,3 @@ export const App: FC = memo(() => {
         </div>
     );
 });
-
-const Sheading = styled.h1`
-    font-family: 'NotoSerifJPMedium';
-    color: ${Color.blue01};
-    font-size: ${Vw(60, Device.pc)};
-
-    ${CustomMedia.lessThan("ct")`
-        font-size: 100px;
-    `};
-`

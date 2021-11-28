@@ -6,7 +6,7 @@ import axios from "axios";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Scontents, Sheading01, SheadingFadeIn, SheadingAfter } from '../../../../styleSetting/CommonStyle';
+import { Scontents, Sheading01, SheadingFadeIn, SheadingAfter, SfadeIn } from '../../../../styleSetting/CommonStyle';
 import { Color, Vw, Device } from '../../../../styleSetting/Setting';
 import { flugType } from '../../../../types/Common';
 
@@ -80,13 +80,16 @@ export const PastRecord: FC = memo(() => {
             Record</h2>
             <Scontents>
                 <h3><span>Past-Record</span></h3>
-                <ul>
-                    <Slider {...settings}>
-                        { list }
-                    </Slider>
-                </ul>
+
+                <Swrap flug = {inView}>
+                    <ul>
+                        <Slider {...settings}>
+                            { list }
+                        </Slider>
+                    </ul>
+                </Swrap>
+                
             </Scontents>
-            rendered
         </SpastRecord>
     );
 });
@@ -140,11 +143,13 @@ const SpastRecord = styled.section<flugType>`
 
     .slick-slide {
         padding: 0 ${Vw(20, Device.pc)};
+        article {
+            box-shadow: 0 0 15px -5px #777;
+        }
     }
 
     .slide {
         
-
         &2,
         &6 {
             padding-top: ${Vw(64, Device.pc)};
@@ -160,6 +165,13 @@ const SpastRecord = styled.section<flugType>`
             padding-top: ${Vw(40, Device.pc)};
         }
     }
+`
 
-    
+const Swrap = styled.div<flugType>`
+    margin-right: ${Vw(-500, Device.pc)};
+    opacity: 0;
+    ${props => props.flug ? css`
+        animation: ${SfadeIn} 500ms ease-in 1000ms forwards;
+    ` : css`
+    `}
 `

@@ -10,7 +10,8 @@ type col2Type = {
     reverse: boolean,
     img: string,
     heading: string,
-    text: string
+    text: string,
+    link: string
 }
 
 export const Col2: FC<col2Type> = memo((props) => {
@@ -19,11 +20,11 @@ export const Col2: FC<col2Type> = memo((props) => {
         triggerOnce: true,
     });
 
-    const { reverse, img, heading, text } = props;
+    const { reverse, img, heading, text, link } = props;
 
     return (
         <Scol2 ref={ref} flug = {inView} reverce = {reverse} speed = { 1500 }>
-            <Link to="/">
+            <Link to={link}>
                 <div><img src={img} alt="" /></div>
                 <div>
                     <h3><span>{ heading }</span></h3>

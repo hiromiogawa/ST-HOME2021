@@ -16,18 +16,21 @@ export const Business: FC = memo(() => {
                     img = "/images/index/index_ph01.jpg"
                     heading = "IoT"
                     text = "生活レベルを1つ上げるIOT機材を利用した建築プランの提案"
+                    link = "/iot"
                 />
                 <Col2
                     reverse = { false }
                     img = "/images/index/index_ph02.jpg"
                     heading = "New Construction"
                     text = "ライフサイクルコストと家族の一生を考える。多種多様なプランを建築家と計画実行すること"
+                    link = "/newconstruction"
                 />
                 <Col2
                     reverse = { true }
                     img = "/images/index/index_ph03.jpg"
                     heading = "Remodeling"
                     text = "できることできないことの判断。言葉にできない内容を図面上に補助金やポイント制度のご相談も"
+                    link = "/Remodeling"
                 />
             </Scontents>
         </Sbusiness>
@@ -46,7 +49,7 @@ const Sbg = styled.div`
     top: 0;
     right: 0;
     background-color: ${Color.gray};
-    z-index: -1;
+    z-index: 0;
 
     h2 {
         position: absolute;

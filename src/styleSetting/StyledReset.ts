@@ -114,6 +114,10 @@ a {
 
 img {
 }
+
+p {
+	line-height: 2;
+}
 `
 
 export const Reset = createGlobalStyle`${reset}`
