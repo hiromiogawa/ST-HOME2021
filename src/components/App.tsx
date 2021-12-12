@@ -7,7 +7,7 @@ import { Home } from './pages/home';
 import { Profile } from './pages/Profile';
 //import Business from './Business';
 //import Construction from './Construction';
-//import RecordList from './RecordList';
+import { RecordList } from './pages/record';
 import { RecordDetail } from './pages/RecordDetail';
 //import NewsList from './NewsList';
 //import NewsDetail from './NewsDetail';
@@ -37,12 +37,15 @@ export const App: FC = memo(() => {
                 <Route path='/profile' exact>
                     <Profile />
                 </Route>
+                
+                <Route path='/record/:category/:page'>
+                    <RecordList />
+                </Route>
                 <Route path='/record/detail/:id'>
                     <RecordDetail />
                 </Route>
 
-                {/*<Route path='/business' exact component={Business} />
-                <Route path='/record/:id' exact component={RecordList} />*/}
+                {/*<Route path='/business' exact component={Business} />*/}
                 {/*<Route path='/news/:id' exact component={NewsList} />
                 <Route path='/news/detail/:id' exact component={NewsDetail} />
                 <Route path='/construction' exact component={Construction} />

@@ -10,26 +10,15 @@ import { Scontents, Sheading01, SheadingFadeIn, SheadingAfter, SfadeIn } from '.
 import { Color, Vw, Device } from '../../../../styleSetting/Setting';
 import { flugType } from '../../../../types/Common';
 
-type recordDataType = {
+type recordListDataType = {
     id: number,
-    title: {
-        rendered: string
-    },
     acf: {
-        tsubo: string,
-        price: string,
-        data: string,
-        construction: string,
         img1: string,
-        img2: string,
-        img3: string,
-        img4: string,
-        img5: string
     }
 }
 
 export const PastRecord: FC = memo(() => {
-    const [ recordData, setRecordData ] = useState<recordDataType[]>([]);
+    const [ recordData, setRecordData ] = useState<recordListDataType[]>([]);
 
     const { ref, inView } = useInView({
         threshold: 0,
